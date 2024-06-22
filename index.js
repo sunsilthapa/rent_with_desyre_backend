@@ -5,6 +5,15 @@ const cloudinary = require('cloudinary');
 const acceptMultimedia = require('connect-multiparty');
 const connectToDB = require('./database/db.js');
 
+const userRoutes = require('./routes/userRoutes');
+const clothRoutes = require('./routes/clothRoutes');
+const rentalRoutes = require('./routes/rentalRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+const favoriteRoutes = require('./routes/favoriteRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const shippingDetailsRoutes = require('./routes/shippingRoutes.js');
+const paymentRoutes = require('./routes/paymentRoutes');
+
 //* Making express app
 const app = express();
 
@@ -44,12 +53,14 @@ app.use('/images', express.static('images'));
 connectToDB();
 
 //* Define routes
-// app.use('/api/user', require('./routes/userRoutes'));
-// app.use("/api/product", require("./routes/productRoutes"));
-// app.use("/api/category", require("./routes/categoryRoutes.js"));
-// app.use("/api/order", require("./routes/orderRoutes.js"));
-// app.use("/api/cart", require("./routes/cartRoutes.js"));
-// app.use("/api/favorites", require("./routes/favoriteRoute.js"))
+app.use('/api/user', userRoutes);
+app.use('/api/clothes', clothRoutes);
+app.use('/api/rentals', rentalRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/favorites', favoriteRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/shipping', shippingDetailsRoutes);
+app.use('/api/payment', paymentRoutes);
 
 //* Define a simple /test route
 app.get('/test', (req, res) => {
